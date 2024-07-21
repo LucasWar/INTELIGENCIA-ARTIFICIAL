@@ -1,7 +1,8 @@
 from tps import Solver
+import os
 
 def lerArquivo(nome):
-    arquivo = open(nome, "r")
+    arquivo = open(os.getcwd()+"\\trabalhoIA_part2\\entradas\\"+nome, "r")
     texto = arquivo.read()
     linhas = texto.strip().split('\n')
     
@@ -12,6 +13,7 @@ def lerArquivo(nome):
         matriz.append(elementos)
     
     return matriz
+
 
 matriz = lerArquivo('FRI26.txt')
 solver = Solver(matriz)
