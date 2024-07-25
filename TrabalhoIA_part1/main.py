@@ -31,9 +31,14 @@ def distManhattan(tabuleiroInicial,tabuleiroObj):
     return soma
 
 tabuleiroInicial = slidingPuzzle()     
-tabuleiroInicial.iniciarTabuleiro(4)
+tabuleiroInicial.iniciarTabuleiro(5)
 tabuleiroInicial.randomizar()
 solve = Solver()
+print("TABULEIRO INCIAL")
+print(tabuleiroInicial.mostrarTabIncial())
+
+print("TABULEIRO OBJETIVO")
+print(tabuleiroInicial.mostrarTabObjetivo())
 #UTILIZANDO BFS, BUSCA EM PROFUDIDADE 
 #caminho, memoria, nosExpandidos, fatorRamificacao = solve.bfs(tabuleiroInicial)
 

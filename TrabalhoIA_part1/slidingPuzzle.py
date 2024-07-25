@@ -4,7 +4,7 @@ class slidingPuzzle:
         self.tabuleiroPai = tabuleiroPai
         
 
-    def __str__(self):  
+    def mostrarTabIncial(self):  
         max_lengths = [max(len(str(element)) for element in row) for row in self.tabuleiro]
         matrix_str = ""
         for row in self.tabuleiro:
@@ -14,6 +14,15 @@ class slidingPuzzle:
             matrix_str += "\n"
         return matrix_str
 
+    def mostrarTabObjetivo(self):  
+        max_lengths = [max(len(str(element)) for element in row) for row in self.tabuleiroObjetivo]
+        matrix_str = ""
+        for row in self.tabuleiroObjetivo:
+            matrix_str += "|"
+            for i, element in enumerate(row):
+                matrix_str += f" {element:>{max_lengths[i]}} |"
+            matrix_str += "\n"
+        return matrix_str
     
     def __call__(self):
         return self.tabuleiro
