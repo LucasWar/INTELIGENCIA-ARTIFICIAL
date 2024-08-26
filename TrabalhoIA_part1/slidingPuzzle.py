@@ -3,7 +3,6 @@ class slidingPuzzle:
     def __init__(self,tabuleiroPai: 'slidingPuzzle' = None):
         self.tabuleiroPai = tabuleiroPai
         
-
     def mostrarTabIncial(self):  
         max_lengths = [max(len(str(element)) for element in row) for row in self.tabuleiro]
         matrix_str = ""
@@ -48,7 +47,11 @@ class slidingPuzzle:
         return self.tabuleiroObjetivo
 
     def iniciarTabuleiro(self, n:int,tabuleiro: list[list[int]] = '',tabuleiroObjetivo: list[list[int]] = ''):
-        self.n = n
+        if(tabuleiro == ''):
+            self.n = n
+        else:
+            n = self.n = len(tabuleiro)
+            
         if(tabuleiro == ''):
             self.tabuleiro:list[list[int]] = [[j + i * n + 1 for j in range(n)] for i in range(n)]
             self.tabuleiro[self.n - 1][self.n - 1] = 0
@@ -65,7 +68,7 @@ class slidingPuzzle:
 
     #Função utilizada para embaralhar o tabuleiro ate um limite minimo de peças peças corretas dentro do tabuleiro
     def randomizar(self):
-        while(self.calcularNumPosCorretas() > 2):
+        while(self.calcularNumPosCorretas() > (self.n*self.n)*0.30):
             #Movimento escolhidos aleatoriamente e executados 
             execute = choice([self.moverCima,self.moverBaixo,self.moverDireita,self.moverEsquerda])
             execute()
@@ -195,13 +198,14 @@ class slidingPuzzle:
 
         return novosTabuleiros
     
-    def solucao(self):
+    def solucao(self, imprimirResultado = False):
         caminho = self
         caminho = caminho.inverterJunstarTabuleiros()
         passos = 0
         while(True):
-            #print("--------PASSO N° {}--------".format(passos))
-            #print(caminho)
+            if(imprimirResultado == True):
+                print("--------PASSO N° {}--------".format(passos))
+                print(caminho)
             if(caminho.getTabuleiroPai() != None):
                 caminho = caminho.getTabuleiroPai()
                 passos += 1

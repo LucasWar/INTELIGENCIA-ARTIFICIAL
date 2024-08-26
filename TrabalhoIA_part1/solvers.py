@@ -1,11 +1,12 @@
 from typing import List,Callable
 from queue import PriorityQueue, Queue
 from slidingPuzzle import slidingPuzzle
-
+import time
 class Solver:
     
     @staticmethod
     def AStar(tabInicial:slidingPuzzle, heuristc: Callable[[List[List[int]], List[List[int]]], int]):
+        inicio = time.time()
         print("ALGORITMO UTILIZADO A*")
         #Atribuição para o tabuleiro considerado estado final do jogo.
         tabObjetivo = tabInicial.getTabObjeitivo()
@@ -49,7 +50,8 @@ class Solver:
             atualTabuleiro = tabuleiro[2]
 
             if(atualTabuleiro() == tabObjetivo):
-                return atualTabuleiro,tamanhoMaxFila,nosExpandidos,(numRamificacao/nosExpandidos)
+                fim = time.time()
+                return atualTabuleiro,tamanhoMaxFila,nosExpandidos,(numRamificacao/nosExpandidos) if nosExpandidos > 0 else 0,fim - inicio
                 
             #Apenas tabuleiros que ainda não foram expadidos podem passar e verificar as possiveis novas jogadas
             if(str(atualTabuleiro()) not in listFechada):
@@ -80,6 +82,7 @@ class Solver:
                         
     @staticmethod
     def bfs(estdadoAtual:slidingPuzzle):
+        inicio = time.time()
         print("ALGORITMO UTILIZADO BFS")
         tabObjetivo = estdadoAtual.getTabObjeitivo()
         #Criação da fila FIFO
@@ -109,7 +112,8 @@ class Solver:
             novosTabuleiros = []
 
             if(atualTabuleiro() == tabObjetivo):
-                return atualTabuleiro,tamanhoMaxFila,nosExpandidos,(numRamificacao/nosExpandidos)
+                fim = time.time()
+                return atualTabuleiro,tamanhoMaxFila,nosExpandidos,(numRamificacao/nosExpandidos) if nosExpandidos > 0 else 0, fim - inicio
             if(str(atualTabuleiro()) not in listaFechada):
 
                 #Adiciona todo tabuleiro expandido a lista fechada para que não seja expandido novamente 
@@ -150,6 +154,7 @@ class Solver:
                 return nosExpandidos, numRamificacao 
         tabObjetivo = slidingPuzzle()
         tabObjetivo.iniciarTabuleiro(len(tabInicial()),tabInicial.getTabObjeitivo())
+        inicio = time.time()
         print("ALGORITMO UTILIZADO A* BIDIRECIONAL") 
         
         gScoreOrigem = {}
@@ -205,8 +210,8 @@ class Solver:
                 else:
                     caminhoObjetivo = caminhoOrigem
                 
-
-                return caminhoObjetivo,(tamanhoMaxDestino + tamanhoMaxOrigem),nosExpandidos,(numRamificacao/nosExpandidos)
+                fim = time.time()
+                return caminhoObjetivo,(tamanhoMaxDestino + tamanhoMaxOrigem),nosExpandidos,(numRamificacao/nosExpandidos) if nosExpandidos > 0 else 0, fim - inicio
             
             elif(str(tabuleiroObjetivo[2]()) in gScoreOrigem):  
                 caminhoObjetivo = tabuleiroObjetivo[2] 
@@ -216,8 +221,8 @@ class Solver:
                     caminhoObjetivo = caminhoObjetivo.inverterJunstarTabuleiros(caminhoOrigem)
                 else:
                     caminhoObjetivo = caminhoOrigem
-                    
-                return caminhoObjetivo,(tamanhoMaxDestino + tamanhoMaxOrigem),nosExpandidos,(numRamificacao/nosExpandidos)
+                fim = time.time()
+                return caminhoObjetivo,(tamanhoMaxDestino + tamanhoMaxOrigem),nosExpandidos,(numRamificacao/nosExpandidos),fim - inicio
 
             objTabuleiroObjetivo = tabuleiroObjetivo[2]
             objTabuleiroOrigem = tabuleiroOrigem[2]
@@ -228,6 +233,7 @@ class Solver:
     
     @staticmethod
     def buscaProfInterativo(tabInical):
+        inicio = time.time()
         print("ALGORITMO UTILIZADO DFS")
         limite = 0
 
@@ -241,7 +247,8 @@ class Solver:
             resultado, nosExpandidos, ramificacoes, maxPilhaAtual = Solver.dfs(tabInical, limite, nosExpandidos, ramificacoes, 0)
             tamMaxFila = max(tamMaxFila, maxPilhaAtual)
             if resultado is not False:
-                return resultado,tamMaxFila, nosExpandidos, ramificacoes / nosExpandidos if nosExpandidos > 0 else 0
+                fim = time.time()
+                return resultado,tamMaxFila, nosExpandidos, ramificacoes / nosExpandidos if nosExpandidos > 0 else 0, fim - inicio
             else:
                 limite += 1
 

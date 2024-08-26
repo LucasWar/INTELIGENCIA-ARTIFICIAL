@@ -1,31 +1,28 @@
-from tps import Solver
+from tsp import Solver
 import os
+import random 
 
-def lerArquivo(nome):
-    arquivo = open(os.getcwd()+"\\trabalhoIA_part2\\entradas\\"+nome, "r")
-    texto = arquivo.read()
-    linhas = texto.strip().split('\n')
+solve = Solver("FRI26.txt")
+solve.algoritmoGenetico()
+
+
+# solver = Solver("ATT48.txt")
+# distMedia = tempoMedio = maiorDist = menorDist = 0
+# menorDist = float('inf')
+# numPassos = 0
+# for _ in range(0,10):
+#     solver.subidaDeEncosta()
+#     caminho, distancia, tempo = solver.retorneResultados()
+
+#     if distancia > maiorDist:
+#         maiorDist = distancia
     
-  
-    matriz = []
-    for linha in linhas:
-        elementos = list(map(float, linha.split()))
-        matriz.append(elementos)
-    
-    return matriz
+#     elif distancia < menorDist:
+#         menorDist = distancia
 
-
-matriz = lerArquivo('FRI26.txt')
-solver = Solver(matriz)
-
-solver.subidaDeEncosta()
-solver.imprimirResultados()
-
-solver.algoritmoGenetico()
-solver.imprimirResultados()
-
-solver.temperaSimulada()
-solver.imprimirResultados()
-
-solver.buscaTabu()
-solver.imprimirResultados()
+#     distMedia += distancia
+#     tempoMedio += tempo
+# tempoMedio = tempoMedio / 10
+# distMedia = distMedia / 10
+# print("Maior distancia {}, menor distancia {}".format(maiorDist,menorDist))
+# print("Tempo medio {}, distancia media {}".format(tempoMedio,distMedia))
