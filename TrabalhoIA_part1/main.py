@@ -3,7 +3,7 @@ from slidingPuzzle import slidingPuzzle
 import utils
 
 tabuleiroInicial = slidingPuzzle()     
-tabuleiroInicial.iniciarTabuleiro(6)
+tabuleiroInicial.iniciarTabuleiro(4)
 tabuleiroInicial.randomizar()
 
 solve = Solver()
@@ -13,5 +13,5 @@ print(tabuleiroInicial.mostrarTabIncial())
 print("TABULEIRO OBJETIVO")
 print(tabuleiroInicial.mostrarTabObjetivo())
 
-caminho, memoria, nosExpandidos, fatorRamificacao,tempo = solve.bidirecionalAstar(tabuleiroInicial,utils.distManhattan)
+caminho, memoria, nosExpandidos, fatorRamificacao,tempo = solve.buscaProfInterativo(tabuleiroInicial)
 utils.mostrarResultados(caminho, memoria, nosExpandidos, fatorRamificacao,tempo)

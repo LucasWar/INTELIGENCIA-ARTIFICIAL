@@ -166,7 +166,8 @@ class slidingPuzzle:
         return True
 
     #Função utilizada para verificar e realizar todas as possiveis jogadas para o tabuleiro, retornar uma lista de objetos slidingPuzzle
-    def possibilidades(self,tabuleiroPai:'slidingPuzzle'):
+    def possibilidades(self):
+        tabuleiroPai = self
         novosTabuleiros = []
         if(self.veirfiqueMoveCima() == True):
             newTabuleiro = slidingPuzzle(tabuleiroPai)

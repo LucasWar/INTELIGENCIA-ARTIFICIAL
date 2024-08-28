@@ -59,7 +59,7 @@ class Solver:
                 listFechada.add(str(atualTabuleiro()))
 
                 #Atribuição de todas as possiveis jogadas para o atual tabuleiro analisado
-                novosTabuleiros = atualTabuleiro.possibilidades(atualTabuleiro)
+                novosTabuleiros = atualTabuleiro.possibilidades()
 
                 if novosTabuleiros:
                     nosExpandidos += 1
@@ -79,6 +79,8 @@ class Solver:
                                 novoTabuleiro)
                         fila.put(item)
                         numRamificacao += 1
+
+                  
                         
     @staticmethod
     def bfs(estdadoAtual:slidingPuzzle):
@@ -120,7 +122,7 @@ class Solver:
                 listaFechada.add(str(atualTabuleiro()))
 
                 #Atribuição de todas as possiveis jogadas para o atual tabuleiro analisado
-                novosTabuleiros = atualTabuleiro.possibilidades(atualTabuleiro)
+                novosTabuleiros = atualTabuleiro.possibilidades()
 
                 nosExpandidos += 1
                 for novoTabuleiro in novosTabuleiros:
@@ -130,11 +132,13 @@ class Solver:
                             fila.put(item)
                             numRamificacao += 1
 
+
+
     @staticmethod
     def bidirecionalAEstrela(tabInicial:slidingPuzzle,heuristc: Callable[[List[List[int]], List[List[int]]], int]):  
         #Função para realizar a analise dos tabuleiros de cada fila, seja o tabuleiro que vai ate o estado destinho como o caminho inverso.      
         def analisarTabuliero(objAtual, objObjetivo, gScore, fScore, fila, nosExpandidos, numRamificacao):
-                novosTabuleiros = objAtual.possibilidades(objAtual)
+                novosTabuleiros = objAtual.possibilidades()
                 if novosTabuleiros:
                     nosExpandidos += 1
 
@@ -231,6 +235,10 @@ class Solver:
             nosExpandidos, numRamificacao = analisarTabuliero(objTabuleiroOrigem, objTabuleiroObjetivo, gScoreOrigem, fScoreOrigem, filaOrigem, nosExpandidos, numRamificacao)
             nosExpandidos, numRamificacao = analisarTabuliero(objTabuleiroObjetivo, objTabuleiroOrigem, gScoreObjetivo, fScoreObjetivo, filaObjetivo, nosExpandidos, numRamificacao)
     
+
+
+
+
     @staticmethod
     def buscaProfInterativo(tabInical):
         inicio = time.time()
@@ -268,7 +276,7 @@ class Solver:
             return False, nosExpandidos, ramificacoes, tamMaxFila
 
         if limite > 0:
-            novosTabuleiros = estadoInicial.possibilidades(estadoInicial)  
+            novosTabuleiros = estadoInicial.possibilidades()  
             nosExpandidos += 1               
             ramificacoes += len(novosTabuleiros)
             for novoTabuleiro in novosTabuleiros:
@@ -282,10 +290,10 @@ class Solver:
 
     @staticmethod
     def ciclos(node):
-        state = node()
-        parent = node.getTabuleiroPai()
-        while parent is not None:
-            if state == parent():
+        estado = node()
+        pai = node.getTabuleiroPai()
+        while pai is not None:
+            if estado == pai():
                 return True
-            parent = parent.getTabuleiroPai()
+            pai = pai.getTabuleiroPai()
         return False
