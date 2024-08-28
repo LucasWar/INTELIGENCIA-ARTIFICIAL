@@ -5,7 +5,7 @@ import time
 class Solver:
     
     @staticmethod
-    def AStar(tabInicial:slidingPuzzle, heuristc: Callable[[List[List[int]], List[List[int]]], int]):
+    def AEstrela(tabInicial:slidingPuzzle, heuristc: Callable[[List[List[int]], List[List[int]]], int]):
         inicio = time.time()
         print("ALGORITMO UTILIZADO A*")
         #Atribuição para o tabuleiro considerado estado final do jogo.
@@ -131,7 +131,7 @@ class Solver:
                             numRamificacao += 1
 
     @staticmethod
-    def bidirecionalAstar(tabInicial:slidingPuzzle,heuristc: Callable[[List[List[int]], List[List[int]]], int]):  
+    def bidirecionalAEstrela(tabInicial:slidingPuzzle,heuristc: Callable[[List[List[int]], List[List[int]]], int]):  
         #Função para realizar a analise dos tabuleiros de cada fila, seja o tabuleiro que vai ate o estado destinho como o caminho inverso.      
         def analisarTabuliero(objAtual, objObjetivo, gScore, fScore, fila, nosExpandidos, numRamificacao):
                 novosTabuleiros = objAtual.possibilidades(objAtual)

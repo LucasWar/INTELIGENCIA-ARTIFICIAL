@@ -1,6 +1,5 @@
 from solvers import Solver
 from slidingPuzzle import slidingPuzzle
-import time
 import utils
 
 tabuleiroInicial = slidingPuzzle()     
