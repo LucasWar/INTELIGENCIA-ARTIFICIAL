@@ -13,5 +13,5 @@ print(tabuleiroInicial.mostrarTabIncial())
 print("TABULEIRO OBJETIVO")
 print(tabuleiroInicial.mostrarTabObjetivo())
 
-caminho, memoria, nosExpandidos, fatorRamificacao,tempo = solve.buscaProfInterativo(tabuleiroInicial)
+caminho, memoria, nosExpandidos, fatorRamificacao,tempo = solve.bidirecionalAEstrela(tabuleiroInicial,utils.distManhattan)
 utils.mostrarResultados(caminho, memoria, nosExpandidos, fatorRamificacao,tempo)

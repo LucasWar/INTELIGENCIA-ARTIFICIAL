@@ -206,7 +206,7 @@ class slidingPuzzle:
         while(True):
             if(imprimirResultado == True):
                 print("--------PASSO N° {}--------".format(passos))
-                print(caminho)
+                print(caminho.mostrarTabIncial())
             if(caminho.getTabuleiroPai() != None):
                 caminho = caminho.getTabuleiroPai()
                 passos += 1
